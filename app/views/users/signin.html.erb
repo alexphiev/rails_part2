@@ -1,7 +1,7 @@
-<h1>Connexion</h1>
+<h1>Création de compte</h1>
 <p><a href="/users/home">Retourner à l'accueil</a></p>
-<%= form_tag "/users/login", method: "post" do %>
+<%= form_tag "/users/signin", method: "post" do %>
   <input type="text" name="name" />
   <input type="password" name="password" />
-  <input type="submit" value="Se connecter" />
+  <input type="submit" value="Valider" />
 <%end%>
