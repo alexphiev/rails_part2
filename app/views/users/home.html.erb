@@ -1,3 +1,10 @@
-<h1>Bienvenue !</h1>
-<div><a href="/users/login">S'identifier</a></div>
-<div><a href="/users/signin">Créer un compte</a></div>
+<% if @current_user %>
+  <h1>Bienvenue <%= @current_user.name %> !</h1>
+    <%= form_tag "/users/home", method: "post" do %>
+      <input type="submit" value="Se déconnecter" />
+    <%end%>
+<% else %>
+  <h1>Bienvenue visiteur anonyme !</h1>
+  <div><a href="/users/login">S'identifier</a></div>
+  <div><a href="/users/signin">Créer un compte</a></div>
+<% end %>

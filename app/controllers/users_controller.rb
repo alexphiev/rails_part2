@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   def home
+    if session[:user_id]
+      @current_user = User.find(session[:user_id])
+    end
   end
 
   def create
@@ -22,11 +25,19 @@ class UsersController < ApplicationController
     .try(:authenticate, params[:password]) # => user
 
     if @current_user
-      flash[:info] = "Bienvenue #{@current_user.name} !"
+      session[:user_id] = @current_user.id
+      flash[:info] = "Bienvenue #{@current_user.name}, vous êtes connecté !"
       redirect_to "/users/home"
     else
+      session[:user_id] = nil
       flash[:info] = "Echec de la connexion"
       redirect_to "/users/login"
     end
+  end
+
+  def disconnect
+    session[:user_id] = nil
+    flash[:info] = "Vous êtes déconnecté !"
+    redirect_to "/users/home"
   end
 end
