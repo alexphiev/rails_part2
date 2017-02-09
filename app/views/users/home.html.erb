@@ -1,10 +1,20 @@
 <% if @current_user %>
-  <h1>Bienvenue <%= @current_user.name %> !</h1>
-    <%= form_tag "/users/home", method: "post" do %>
-      <input type="submit" value="Se déconnecter" />
-    <%end%>
+  <% if @current_user.role == "admin" %>
+    <h1>Bienvenue Admin: <%= @current_user.name %> !</h1>
+  <% else %>
+    <h1>Bienvenue <%= @current_user.name %> !</h1>
+  <%end%>
+  <%= form_tag "/users/home", method: "post" do %>
+    <input type="submit" value="Se déconnecter" />
+  <%end%>
 <% else %>
   <h1>Bienvenue visiteur anonyme !</h1>
   <div><a href="/users/login">S'identifier</a></div>
   <div><a href="/users/signin">Créer un compte</a></div>
 <% end %>
+
+<% if @current_user %>
+  <% if @current_user.role == "admin" %>
+    <h3><a href="/users/admin">Administration</a></h3>
+  <%end%>
+<%end%>

@@ -8,4 +8,7 @@ Rails.application.routes.draw do
 
   get 'users/signin' => 'users#signin'
   post 'users/signin' => 'users#create'
+
+  get 'users/admin' => 'users#admin'
+  post 'users/admin' => 'users#admin_delete_user'
 end

@@ -1,0 +1,18 @@
+<p><a href="/users/home">Retourner à l'accueil</a></p>
+
+<h2> Liste des utilisateurs </h2>
+<% @users = User.all %>
+<% @users.each do |user| %>
+  <p>
+    <%= user_display user %>
+  </p>
+<% end %>
+
+<%= form_tag "/users/admin", method: "post" do %>
+  <select name="user_id">
+    <% @users.each do |user| %>
+      <option value="<%= user.id %>"><%= user.name %></option>
+    <% end %>
+  </select>
+  <input type="submit" value="Supprimer l'utilisateur" />
+<% end %>
